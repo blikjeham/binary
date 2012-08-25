@@ -133,10 +133,10 @@ static int make_count(short count_link, struct field *line, struct count *count)
 	break;
     case -1:
 	if ((counter != -1) && (line->link.x != -1)) {
-	    count->num++;
 	    if (counter == 1) {
 		count->one++;
 		count->zero++;
+		count->num += 2;
 		counter = 0;
 	    } else {
 		counter++;
