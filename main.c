@@ -22,6 +22,7 @@ int readfield(char *filename)
     FILE *fd;
     int x,y;
     char number;
+    int value;
     
     if (!(fd = fopen(filename, "r")))
 	return 1;
@@ -31,20 +32,12 @@ int readfield(char *filename)
     for (y=0; y<YMAX; y++) {
 	for (x=0; x<XMAX; x++) {
 	    number = fgetc(fd);
-	    switch(number) {
-	    case '0':
-		field[x][y].value = 0;
-		field[x][y].initial = 1;
-		break;
-	    case '1':
-		field[x][y].value = 1;
-		field[x][y].initial = 1;
-		break;
-	    default:
-		field[x][y].value = -1;
-		field[x][y].initial = 0;
-		break;
+	    switch (number) {
+	    case '0': value = 0; break;
+	    case '1': value = 1; break;
+	    default: value = -1; break;
 	    }
+	    init_field(x, y, value);
 	}
     }
 
@@ -105,7 +98,10 @@ int main(int argc, char **argv)
 	check_split(dir);
 	printfield();
 	printf("check_balance(%d)\n", dir);
-	check_balance(dir);
+	if (hori(dir))
+	    check_balance(dir, YMAX);
+	else
+	    check_balance(dir, XMAX);
 	printfield();
 	solved = is_solved();
     }

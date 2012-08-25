@@ -3,13 +3,13 @@
 
 #include "binary.h"
 
-struct line {
+struct count {
     int zero;
     int one;
     int empty;
     int num;
 };
 
-void check_balance(int );
+void check_balance(int , int );
 
 #endif /* BALANCE_H */
