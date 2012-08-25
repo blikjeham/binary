@@ -1,3 +1,26 @@
 binary
 
 A binary puzzle solver.
+
+Binary puzzles (also known as binary sudoku) usually consist of a grid of 12*12.
+These dimensions can differ per puzzle.
+
+The grid will contain only 0's and 1's. Some of the 0's and 1's are already given,
+so you don't have to start from scratch.
+
+The rules for filling in the missing 0's and 1's are as follows:
+- The twin rule:
+  No more than two 0's or two 1's may be found next to each other. This means that
+  1001 is OK, but 10001 is not OK. The same goes for 0110 (OK) and 01110 (not OK).
+- The balance rule:
+  An equal amount of 0's and 1's must be on each line and each column.
+  For a grid of 12*12 this means that 6 zeros and 6 ones must be on each line.
+- The unique rule:
+  No two lines (or columns) may be the same. Each line must be unique.
+
+The goal of this program is not to solve all my binary puzzles so I don't have to.
+The goal is to deepen my understanding of the puzzle by translating my solving
+skills to algorithms the computer will understand. This means that I first must
+understand how I solve a puzzle, and then make the computer understand how to do it.
+So this is a test of my knowledge of the binary puzzles and my understanding of the
+programming language of my choice (C).
