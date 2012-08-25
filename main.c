@@ -12,6 +12,7 @@
 
 #include "binary.h"
 #include "twin.h"
+#include "balance.h"
 
 struct field field[XMAX][YMAX];
 int solved;
@@ -68,7 +69,6 @@ static void printfield(void)
 	}
 	printf("|\n");
     }
-    printf("\n");
 }
 
 static int switch_dir(int dir)
@@ -97,11 +97,15 @@ int main(int argc, char **argv)
     while (!solved) {
 	left = get_left();
 	dir = switch_dir(dir);
-	printf("left = %d\tdir = %d\n", left, dir);
-	
+	printf("left = %d\n", left);
+	printf("check_twin(%d)\n", dir);
 	check_twin(dir);
 	printfield();
+	printf("check_split(%d)\n", dir);
 	check_split(dir);
+	printfield();
+	printf("check_balance(%d)\n", dir);
+	check_balance(dir);
 	printfield();
 	solved = is_solved();
     }

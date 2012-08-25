@@ -13,11 +13,15 @@ INSTALL = /usr/bin/install
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 
-DEPS = config.h binary.h twin.h
+DEPS = config.h
+DEPS += binary.h
+DEPS += twin.h
+DEPS += balance.h
 
 OBJ = main.o
 OBJ += binary.o
 OBJ += twin.o
+OBJ += balance.o
 
 %.o: %c $(DEPS)
 	$(COMPILE) -c -o $@ $<

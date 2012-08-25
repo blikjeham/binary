@@ -9,13 +9,6 @@ struct field {
     int initial;
 };
 
-struct line {
-    int zero;
-    int one;
-    int empty;
-    int num;
-};
-
 int get_left(void);
 int is_solved(void);
 
