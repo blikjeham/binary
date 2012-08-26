@@ -8,6 +8,12 @@
 
 extern struct field field[XMAX][YMAX];
 
+void set_value(struct field *f, int value)
+{
+    f->value = value;
+    init_link(f);
+}
+
 void init_link(struct field *f)
 {
     f->link.x = -1;
@@ -16,10 +22,8 @@ void init_link(struct field *f)
 
 void init_field(int x, int y, int value)
 {
-    field[x][y].value = value;
+    set_value(&(field[x][y]), value);
     field[x][y].initial = (value == -1 ? 0 : 1);
-    field[x][y].link.x = -1;
-    field[x][y].link.y = -1;
 }
 
 int get_left(void)
@@ -46,3 +50,4 @@ int is_solved(void)
     }
     return 1;
 }
+

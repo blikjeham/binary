@@ -51,9 +51,9 @@ void fill_remain(int max, struct field *line, struct count count)
 {
     printf("fill_remain; num=%d, empty=%d\n", count.num, count.empty);
     if ((count.zero == max/2) && (count.empty > -1))
-	line[count.empty].value = 1;
+	set_value(&(line[count.empty]), 1);
     if ((count.one == max/2) && (count.empty > -1))
-	line[count.empty].value = 0;
+	set_value(&(line[count.empty]), 0);
 }
 
 void link_remain(int max, struct field *f)
@@ -103,7 +103,7 @@ static void complete_link(int i, struct field *f)
     x = f[i].link.x;
     if (f[x].value != -1) {
 	printf("complete_link, i=%d, x=%d\n", i, x);
-	f[i].value = !(f[x].value);
+	set_value(&(f[i]), !(f[x].value));
     }
 }
 
@@ -167,7 +167,6 @@ static void countline(int dir, struct field *line)
 	if (line[i].value == -1)
 	    count.empty = i;
     }
-    printf("1count: zero=%d, one=%d, num=%d, empty=%d\n", count.zero, count.one, count.num, count.empty);
     fill_remain(max, line, count);
     make_link(max, line, count);
     check_link(max, line);
@@ -180,7 +179,6 @@ static void countline(int dir, struct field *line)
 	if ((line[i].value == -1) && (line[i].link.x == -1))
 	    count.empty = i;
     }
-    printf("2count: zero=%d, one=%d, num=%d, empty=%d\n", count.zero, count.one, count.num, count.empty);
     fill_remain(max, line, count);
 }
 
