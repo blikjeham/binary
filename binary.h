@@ -4,7 +4,7 @@
 #define XMAX 12
 #define YMAX 12
 
-#define hori(a) a == 1 || a == -1 ? 1 : 0
+#define hori(a) (a == 1 || a == -1 ? 1 : 0)
 
 struct link {
     int x;
