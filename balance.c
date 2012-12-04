@@ -49,7 +49,6 @@ static void restore_line(int i, int dir, struct field *line)
 
 void fill_remain(int max, struct field *line, struct count count)
 {
-    printf("fill_remain; num=%d, empty=%d\n", count.num, count.empty);
     if ((count.zero == max/2) && (count.empty > -1))
 	set_value(&(line[count.empty]), 1);
     if ((count.one == max/2) && (count.empty > -1))
@@ -102,7 +101,6 @@ static void complete_link(int i, struct field *f)
     int x;
     x = f[i].link.x;
     if (f[x].value != -1) {
-	printf("complete_link, i=%d, x=%d\n", i, x);
 	set_value(&(f[i]), !(f[x].value));
     }
 }
@@ -113,7 +111,6 @@ void check_link(int max, struct field *line)
 
     for (i=0; i<max; i++) {
 	if (line[i].link.x != -1) {
-	    printf("found link with %d\n", line[i].link.x);
 	    complete_link(i, line);
 	}
     }

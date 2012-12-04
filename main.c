@@ -13,6 +13,7 @@
 #include "binary.h"
 #include "twin.h"
 #include "balance.h"
+#include "unique.h"
 
 struct field field[XMAX][YMAX];
 int solved;
@@ -23,12 +24,10 @@ int readfield(char *filename)
     int x,y;
     char number;
     int value;
-    
+	
     if (!(fd = fopen(filename, "r")))
 	return 1;
 
-    printf("Reading file\n");
-    
     for (y=0; y<YMAX; y++) {
 	for (x=0; x<XMAX; x++) {
 	    number = fgetc(fd);
@@ -48,6 +47,10 @@ int readfield(char *filename)
 static void printfield(void)
 {
     int x,y;
+    for (x=0; x<XMAX; x++) {
+	printf("--");
+    }
+    printf("\n");
     for (y=0; y<YMAX; y++) {
 	for (x=0; x<XMAX; x++) {
 	    if ((field[x][y].value == 1) || (field[x][y].value == 0))
@@ -62,6 +65,11 @@ static void printfield(void)
 	}
 	printf("|\n");
     }
+    for (x=0; x<XMAX; x++) {
+	printf("--");
+    }
+    printf("\n");
+
 }
 
 static int switch_dir(int dir)
@@ -98,10 +106,13 @@ int main(int argc, char **argv)
 	check_split(dir);
 	printfield();
 	printf("check_balance(%d)\n", dir);
-	if (hori(dir))
+	if (hori(dir)) {
 	    check_balance(dir, YMAX);
-	else
+	    check_unique(dir, YMAX, XMAX);
+	} else {
 	    check_balance(dir, XMAX);
+	    check_unique(dir, XMAX, YMAX);
+	}
 	printfield();
 	solved = is_solved();
     }
