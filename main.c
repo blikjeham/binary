@@ -34,7 +34,15 @@ int readfield(char *filename)
 	    switch (number) {
 	    case '0': value = 0; break;
 	    case '1': value = 1; break;
-	    default: value = -1; break;
+	    case '.': value = -1; break;
+	    default:
+		x--;
+		if (x<0) {
+		    x = XMAX-1;
+		    y--;
+		    if (y<0) y = 0;
+		}
+		break;
 	    }
 	    init_field(x, y, value);
 	}
